@@ -12,17 +12,25 @@ TwitterのStreaming APIから日本語のツイートを取得し，取得した
 書き出されます．このとき出力先ファイルにはトレンド語だけでなく，その単語がどれだけ  
 の度合いでトレンドとなっているかの数値と，その単語と頻繁に共起している単語の  
 上位３つが同時に書き出されます．  
-  
-また，上記で述べていないプログラムファイルの概要ですが，dbUpdater.pyはツイートから  
-抽出した単語と，その単語の出現頻度をデータベースへ保存します．  
-fetchStream.pyはTwitterのStreaming APIから日本語のツイートを取得するためのものです．  
-parse.pyは入力された文字列を形態素解析するためのプログラムで，  
-fileExtractor.pyは取得したツイートをparse.pyにより形態素解析し，抽出した単語を  
-dbUpdater.pyによりデータベースへ保存します．tsTfIdf.pyはこのプロダクトの要で，  
+
+##About each component
+###dbUpdater.py
+ツイートから抽出した単語と，その単語の出現頻度をデータベースへ保存します．  
+データベースはPostgreSQLの使用を前提としています．
+
+###fetchStream.py
+TwitterのStreaming APIから日本語のツイートを取得します．
+
+###parse.py
+入力された文字列を形態素解析するためのプログラムです．
+
+###fileExtractor.py
+取得したツイートをparse.pyにより形態素解析し，抽出した単語を  
+dbUpdater.pyによりデータベースへ保存します．
+
+###tsTfIdf.py
 データベースに保存された単語とその出現数からトレンドを計算します．  
-jsonCreator.pyは，計算結果を指定されたファイル名にjson形式で保存します．
 
-
-
-
+###jsonCreator.py
+計算結果となるトレンド語を指定されたファイル名にjson形式で保存します．
 
